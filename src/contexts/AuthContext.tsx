@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AuthService } from '@/services/auth.service';
 import { toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 // Importamos la definición de User desde types/index.ts
 import { User as UserType } from '@/types';
@@ -28,16 +29,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = localStorage.getItem('auth_token');
+      // Cambiar a usar Cookies en lugar de localStorage para consistencia
+      const storedToken = Cookies.get('auth_token');
       setToken(storedToken);
-      const cachedUser = localStorage.getItem('auth_user');
+      const cachedUser = Cookies.get('user_data');
       if (storedToken && cachedUser) {
         try {
           setUser(JSON.parse(cachedUser));
         } catch (error) {
           console.error('Error parsing cached user:', error);
-          localStorage.removeItem('auth_token');
-          localStorage.removeItem('auth_user');
+          Cookies.remove('auth_token');
+          Cookies.remove('user_data');
         }
       }
       setIsLoading(false);
@@ -50,8 +52,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (result.success && result.user && result.token) {
       setUser(result.user);
       setToken(result.token);
-      localStorage.setItem('auth_token', result.token);
-      localStorage.setItem('auth_user', JSON.stringify(result.user));
+      // Los tokens ya se almacenan en AuthService.login() usando Cookies
+      // No necesitamos duplicar el almacenamiento aquí
       toast.success(`Bienvenido ${result.user.nombre}`);
     } else if (result.error) {
       toast.error(result.error);
@@ -61,9 +63,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await AuthService.logout(); // Marca como inactivo en el backend
+      await AuthService.logout(); // Ya limpia las cookies internamente
       setUser(null);
       setToken(null);
+      // Limpiar también localStorage por si algún componente lo usa
       localStorage.removeItem('auth_token');
       localStorage.removeItem('auth_user');
       sessionStorage.clear();
@@ -76,7 +79,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const updateUserData = (updatedUser: User) => {
     setUser(updatedUser);
-    localStorage.setItem('auth_user', JSON.stringify(updatedUser));
+    // Mantener consistencia con cookies
+    Cookies.set('user_data', JSON.stringify(updatedUser), {
+      expires: 1/3,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
   };
 
   return (

@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { getAuthToken } from '@/utils/auth';
 import { Users, LogOut, Home, FileText, Menu, User, Bell, Repeat, BarChart2 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -73,15 +74,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   // Cargar cantidad de notificaciones no leídas
   useEffect(() => {
     if (!user) return;
-    let token = undefined;
-    try {
-      token = localStorage.getItem('auth_token') || undefined;
-    } catch {}
-    if (!token) {
-      try {
-        token = document.cookie.split('; ').find(row => row.startsWith('auth_token='))?.split('=')[1];
-      } catch {}
-    }
+    const token = getAuthToken();
     fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
