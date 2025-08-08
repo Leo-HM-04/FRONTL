@@ -46,19 +46,19 @@ const nextConfig = {
     return [
       {
       source: '/api/:path*',
-      destination: 'http://46.202.177.106:4000/api/:path*',
+      destination: 'http://localhost:4000/api/:path*',
     }, 
       {
         source: '/api/estadisticas/:path*',
-        destination: 'http://46.202.177.106:4000/api/estadisticas/:path*',
+        destination: 'http://localhost:4000/api/estadisticas/:path*',
       },
       {
         source: '/api/viaticos/mios',
-        destination: 'http://46.202.177.106:4000/viaticos/mios',
+        destination: 'http://localhost:4000/viaticos/mios',
       },
       {
         source: '/api/viaticos/:path*',
-        destination: 'http://46.202.177.106:4000/viaticos/:path*',
+        destination: 'http://localhost:4000/viaticos/:path*',
       },
     ];
   },

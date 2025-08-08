@@ -73,7 +73,7 @@ useEffect(() => {
 }, [notificaciones, filtro, pagina, porPagina, loadingMore]);
 
   const getToken = () => {
-    let token = undefined;
+    let token: string | undefined = undefined;
     try {
       token = localStorage.getItem('auth_token') || undefined;
     } catch {}
@@ -90,7 +90,7 @@ useEffect(() => {
     setLoading(true);
     const token = getToken();
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/notificaciones`, {
         headers: {
           Authorization: token ? `Bearer ${token}` : ''
         }
@@ -123,7 +123,7 @@ useEffect(() => {
     try {
       const noLeidas = notificaciones.filter(n => !n.leida);
       await Promise.all(noLeidas.map(n =>
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones/${n.id}/marcar-leida`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/notificaciones/${n.id}/marcar-leida`, {
           method: "POST",
           headers: {
             Authorization: token ? `Bearer ${token}` : ''
@@ -232,7 +232,7 @@ useEffect(() => {
                         : '';
                       const marcarLeida = async () => {
                         const token = getToken();
-                        await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones/${n.id}/marcar-leida`, {
+                        await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/notificaciones/${n.id}/marcar-leida`, {
                           method: "POST",
                           headers: {
                             Authorization: token ? `Bearer ${token}` : ''

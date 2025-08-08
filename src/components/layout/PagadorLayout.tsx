@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo, Fragment } from 'react';
-import PagadorNotifications from '@/components/pagador/PagadorNotifications';
+import PagadorNotificationsMejoradas from '@/components/pagador/PagadorNotificationsMejoradas';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -74,7 +74,7 @@ export function PagadorLayout({ children }: PagadorLayoutProps) {
   // Cargar cantidad de notificaciones no leídas para pagador
   useEffect(() => {
     if (!user) return;
-    let token = undefined;
+    let token: string | undefined = undefined;
     try {
       token = localStorage.getItem('auth_token') || undefined;
     } catch {}
@@ -83,7 +83,7 @@ export function PagadorLayout({ children }: PagadorLayoutProps) {
         token = document.cookie.split('; ').find(row => row.startsWith('auth_token='))?.split('=')[1];
       } catch {}
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/notificaciones`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }
@@ -135,7 +135,7 @@ export function PagadorLayout({ children }: PagadorLayoutProps) {
       </header>
 
       {/* Panel de Notificaciones */}
-      <PagadorNotifications open={showNotifications} onClose={() => setShowNotifications(false)} />
+      <PagadorNotificationsMejoradas open={showNotifications} onClose={() => setShowNotifications(false)} />
 
       {/* Sidebar Menu */}
       <AnimatePresence>

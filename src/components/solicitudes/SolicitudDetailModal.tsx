@@ -319,7 +319,7 @@ return (
               if (solicitud.factura_url.startsWith('http')) {
                 facturaUrl = solicitud.factura_url;
               } else {
-                const baseUrl = 'http://46.202.177.106:4000';
+                const baseUrl = 'http://localhost:4000';
                 const rutaArchivo = solicitud.factura_url.startsWith('/') 
                   ? solicitud.factura_url 
                   : `/${solicitud.factura_url}`;
@@ -400,7 +400,7 @@ return (
                     if (solicitud.factura_url.startsWith('http')) {
                       facturaUrl = solicitud.factura_url;
                     } else {
-                      const baseUrl = 'http://46.202.177.106:4000';
+                      const baseUrl = 'http://localhost:4000';
                       const rutaArchivo = solicitud.factura_url.startsWith('/') 
                         ? solicitud.factura_url 
                         : `/${solicitud.factura_url}`;
@@ -455,7 +455,7 @@ return (
                       if (comprobante.ruta_archivo.startsWith('http')) {
                         comprobanteUrl = comprobante.ruta_archivo;
                       } else {
-                        const baseUrl = 'http://46.202.177.106:4000';
+                        const baseUrl = 'http://localhost:4000';
                         const rutaArchivo = comprobante.ruta_archivo.startsWith('/')
                           ? comprobante.ruta_archivo
                           : `/${comprobante.ruta_archivo}`;

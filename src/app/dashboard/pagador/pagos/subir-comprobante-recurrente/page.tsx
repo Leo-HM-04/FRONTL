@@ -161,7 +161,7 @@ export default function SubirComprobanteRecurrentePage() {
                   if (!/^https?:\/\//i.test(comprobantePath)) {
                     // Si el path ya incluye 'uploads/comprobante-recurrentes/', solo usa el nombre de archivo
                     const fileName = comprobantePath.replace(/^.*uploads[\/\\]comprobante-recurrentes[\/\\]/i, "");
-                    src = `http://46.202.177.106:4000/uploads/comprobante-recurrentes/${fileName}`;
+                    src = `http://localhost:4000/uploads/comprobante-recurrentes/${fileName}`;
                   }
                   window.open(src, '_blank', 'noopener,noreferrer');
                   setVerComprobante({ open: false, recurrente: null });
