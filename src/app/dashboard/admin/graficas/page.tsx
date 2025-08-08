@@ -83,7 +83,7 @@ export default function GraficasAdminPage() {
 
       // Solicitudes
       try {
-        const resSolicitudes = await fetch(`http://localhost:4000/api/estadisticas/solicitudes?periodo=${periodo}`);
+        const resSolicitudes = await fetch(`http://46.202.177.106:4000/api/estadisticas/solicitudes?periodo=${periodo}`);
         if (!resSolicitudes.ok) throw new Error('Error al cargar solicitudes');
         const data = await resSolicitudes.json();
         
@@ -109,7 +109,7 @@ export default function GraficasAdminPage() {
 
       // Usuarios
       try {
-        const resUsuarios = await fetch(`http://localhost:4000/api/estadisticas/usuarios?periodo=${periodo}`);
+        const resUsuarios = await fetch(`http://46.202.177.106:4000/api/estadisticas/usuarios?periodo=${periodo}`);
         if (!resUsuarios.ok) throw new Error('Error al cargar usuarios');
         const data = await resUsuarios.json();
         
@@ -134,7 +134,7 @@ export default function GraficasAdminPage() {
 
       // Recurrentes
       try {
-        const resRecurrentes = await fetch(`http://localhost:4000/api/estadisticas/recurrentes?periodo=${periodo}`);
+        const resRecurrentes = await fetch(`http://46.202.177.106:4000/api/estadisticas/recurrentes?periodo=${periodo}`);
         if (!resRecurrentes.ok) throw new Error('Error al cargar recurrentes');
         const data = await resRecurrentes.json();
         
@@ -159,7 +159,7 @@ export default function GraficasAdminPage() {
 
       // Notificaciones
       try {
-        const resNotificaciones = await fetch(`http://localhost:4000/api/estadisticas/notificaciones?periodo=${periodo}`);
+        const resNotificaciones = await fetch(`http://46.202.177.106:4000/api/estadisticas/notificaciones?periodo=${periodo}`);
         if (!resNotificaciones.ok) throw new Error('Error al cargar notificaciones');
         const data = await resNotificaciones.json();
         
@@ -189,7 +189,7 @@ export default function GraficasAdminPage() {
           
           // Intentar obtener nombres de usuario si no vienen
           try {
-            const resUsuarios = await fetch('http://localhost:4000/api/usuarios');
+            const resUsuarios = await fetch('http://46.202.177.106:4000/api/usuarios');
             if (!resUsuarios.ok) throw new Error('Error al cargar nombres de usuarios');
             const usuarios = await resUsuarios.json();
             
@@ -211,7 +211,7 @@ export default function GraficasAdminPage() {
 
       // Tendencia semanal
       try {
-        const resTendencia = await fetch(`http://localhost:4000/api/estadisticas/tendencia-semanal?periodo=${periodo}`);
+        const resTendencia = await fetch(`http://46.202.177.106:4000/api/estadisticas/tendencia-semanal?periodo=${periodo}`);
         if (!resTendencia.ok) throw new Error('Error al cargar tendencia semanal');
         const data = await resTendencia.json();
         

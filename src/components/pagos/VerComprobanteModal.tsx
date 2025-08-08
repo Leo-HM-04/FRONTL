@@ -69,7 +69,7 @@ export const VerComprobanteModal: React.FC<VerComprobanteModalProps> = ({
   }
 
  const comprobanteUrl = comprobante?.ruta_archivo
-  ? new URL(comprobante.ruta_archivo, 'http://localhost:4000').toString()
+  ? new URL(comprobante.ruta_archivo, 'http://46.202.177.106:4000').toString()
   : '';
 
   return (

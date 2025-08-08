@@ -396,7 +396,7 @@ function EditarViaticoPageInner() {
                           <div className="space-y-2">
                             <div className="flex items-center gap-2">
                               <a
-                                href={`http://localhost:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
+                                href={`http://46.202.177.106:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-700 underline break-all"
@@ -411,7 +411,7 @@ function EditarViaticoPageInner() {
                                   {viatico.viatico_url.toLowerCase().endsWith('.pdf') ? '📄 Documento PDF' : '🖼️ Imagen'}
                                 </span>
                                 <a
-                                  href={`http://localhost:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
+                                  href={`http://46.202.177.106:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1"
@@ -427,20 +427,20 @@ function EditarViaticoPageInner() {
                                 <div className="flex items-center justify-center h-full">
                                   {viatico.viatico_url.toLowerCase().endsWith('.pdf') ? (
                                     <iframe
-                                      src={`http://localhost:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
+                                      src={`http://46.202.177.106:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
                                       className="w-full h-full rounded border-0"
                                       title="Vista previa del PDF"
                                       style={{ minHeight: '260px' }}
                                     />
                                   ) : (
                                     <Image
-                                      src={`http://localhost:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
+                                      src={`http://46.202.177.106:4000${viatico.viatico_url.startsWith('/') ? '' : '/'}${viatico.viatico_url}`}
                                       alt="Vista previa del archivo"
                                       width={500}
                                       height={260}
                                       className="max-w-full h-auto max-h-[260px] rounded shadow-sm"
                                       style={{ objectFit: 'contain' }}
-                                      unoptimized={viatico.viatico_url.includes('localhost')}
+                                      unoptimized={viatico.viatico_url.includes('localhost') || viatico.viatico_url.includes('127.0.0.1')}
                                     />
                                   )}
                                 </div>
@@ -490,7 +490,6 @@ function EditarViaticoPageInner() {
                               setMensaje('Archivo actualizado correctamente.');
                             } catch (err) {
                               console.error('Error al subir archivo:', err);
-                              // @ts-expect-error: Puede no tener response
                               setMensaje(err?.response?.data?.error || 'Error al subir el archivo.');
                             }
                           }}

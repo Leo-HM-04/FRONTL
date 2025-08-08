@@ -82,7 +82,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         token = document.cookie.split('; ').find(row => row.startsWith('auth_token='))?.split('=')[1];
       } catch {}
     }
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/notificaciones`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://46.202.177.106:4000"}/api/notificaciones`, {
       headers: {
         Authorization: token ? `Bearer ${token}` : ''
       }
